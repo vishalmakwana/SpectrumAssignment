@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace SpectrumAssignment.ViewModels
 {
-    public partial class LoadingViewModel : BaseViewModel
+    public partial class LoadingViewModel : ApplicationBaseViewModel
     {
         public LoadingViewModel()
         {

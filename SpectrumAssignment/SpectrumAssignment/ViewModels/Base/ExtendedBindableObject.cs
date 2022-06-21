@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
-using CommunityToolkit.Mvvm;
-using CommunityToolkit.Mvvm.ComponentModel;
+using MvvmHelpers;
 
 namespace SpectrumAssignment.ViewModels.Base
 {
-    public abstract class ExtendedBindableObject : ObservableObject
+    public abstract class ExtendedBindableObject : BaseViewModel
     {
         public void RaisePropertyChanged<T>(Expression<Func<T>> property)
         {

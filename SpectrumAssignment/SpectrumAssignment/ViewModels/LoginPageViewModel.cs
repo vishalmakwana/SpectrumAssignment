@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace SpectrumAssignment.ViewModels
 {
-    public class LoginPageViewModel : BaseViewModel
+    public class LoginPageViewModel : ApplicationBaseViewModel
     {
         #region Services
 
@@ -49,7 +49,7 @@ namespace SpectrumAssignment.ViewModels
 
         #region Constructor
 
-        public LoginPageViewModel() 
+        public LoginPageViewModel()
         {
             UserName = new ValidatableObject<string>();
             Password = new ValidatableObject<string>();
@@ -83,8 +83,13 @@ namespace SpectrumAssignment.ViewModels
 
         #region Methods
         private async void ExecuteLoginCommand()
-        { 
-        
+        {
+            ValidateFields();
+            if (_userName.IsValid && _password.IsValid)
+            {
+                await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
+            }
+
         }
 
         public void ValidateFields()
@@ -107,6 +112,10 @@ namespace SpectrumAssignment.ViewModels
             _userName.Validations.Add(new IsNotNullOrEmptyRule<string>
             {
                 ValidationMessage = "Login Id is required"
+            });
+            _userName.Validations.Add(new EmailRule<string>
+            {
+                ValidationMessage = "Please enter valid email address"
             });
             _password.Validations.Add(new IsNotNullOrEmptyRule<string>
             {

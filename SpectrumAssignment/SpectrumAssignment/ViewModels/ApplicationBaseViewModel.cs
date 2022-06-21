@@ -10,20 +10,13 @@ using Xamarin.Forms;
 
 namespace SpectrumAssignment.ViewModels
 {
-    public class BaseViewModel : ExtendedBindableObject
+    public class ApplicationBaseViewModel : ExtendedBindableObject
     {
-        bool isBusy = false;
-        public bool IsBusy
-        {
-            get { return isBusy; }
-            set { SetProperty(ref isBusy, value); }
-        }
 
-        string title = string.Empty;
-        public string Title
+   
+        public ApplicationBaseViewModel()
         {
-            get { return title; }
-            set { SetProperty(ref title, value); }
+
         }
         protected internal virtual void OnAppearing() { }
         protected internal virtual void Initialize(object navigationData = null) { }
@@ -33,7 +26,7 @@ namespace SpectrumAssignment.ViewModels
             await Shell.Current.GoToAsync(state, animate);
             if (Shell.Current.CurrentPage != null)
             {
-                var viewModel = Shell.Current.CurrentPage.BindingContext as BaseViewModel;
+                var viewModel = Shell.Current.CurrentPage.BindingContext as ApplicationBaseViewModel;
                 viewModel.Initialize(navigationData);
             }
         }

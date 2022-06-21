@@ -10,8 +10,9 @@ namespace SpectrumAssignment
     {
         public AppShell()
         {
-            InitializeComponent();
             this.BindingContext = new AppShellViewModel();
+            InitializeComponent();
+           
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
         }
 

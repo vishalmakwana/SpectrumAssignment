@@ -39,7 +39,7 @@ namespace SpectrumAssignment.Models
             {
                 return;
             }
-            var viewModel = Activator.CreateInstance(viewModelType) as BaseViewModel;
+            var viewModel = Activator.CreateInstance(viewModelType) as ApplicationBaseViewModel;
             view.BindingContext = viewModel;
         }
 
@@ -67,7 +67,7 @@ namespace SpectrumAssignment.Models
 
         private static void OnAppearing(object sender, EventArgs e)
         {
-            var viewModel = ((Page)(sender)).BindingContext as BaseViewModel;
+            var viewModel = ((Page)(sender)).BindingContext as ApplicationBaseViewModel;
             viewModel.OnAppearing();
         }
     }

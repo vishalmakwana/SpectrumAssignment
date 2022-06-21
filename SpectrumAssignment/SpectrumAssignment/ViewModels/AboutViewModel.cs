@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 namespace SpectrumAssignment.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+    public class AboutViewModel : ApplicationBaseViewModel
     {
         public AboutViewModel()
         {

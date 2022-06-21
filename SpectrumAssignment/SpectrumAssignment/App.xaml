@@ -32,7 +32,7 @@
                     </VisualStateGroupList>
                 </Setter>
             </Style>
-            <Style x:Key="BaseStyle" TargetType="Element">
+            <!--<Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
                 <Setter Property="Shell.ForegroundColor" Value="White" />
                 <Setter Property="Shell.TitleColor" Value="White" />
@@ -42,7 +42,7 @@
                 <Setter Property="Shell.TabBarForegroundColor" Value="White" />
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarTitleColor" Value="White" />
-            </Style>
+            </Style>-->
 
             <x:Double x:Key="TitleFontSize">28</x:Double>
             <x:Double x:Key="SubTitleFontSize">18</x:Double>
@@ -84,6 +84,26 @@
                 <On Platform="Android" Value="fa-regular-pro-400.ttf#Font Awesome regular" />
                 <On Platform="iOS" Value="FontAwesome5Pro-Regular" />
             </OnPlatform>
+
+            <Style x:Key="labelBaseStyle" TargetType="Label">
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="TextColor" Value="{x:StaticResource DarkTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource MediumTitleFontSize}" />
+            </Style>
+
+            <Style
+                x:Key="labelBoldBaseStyle"
+                BasedOn="{x:StaticResource labelBaseStyle}"
+                TargetType="Label">
+                <Setter Property="FontFamily" Value="RobotoBold" />
+            </Style>
+            <Style
+                x:Key="SubTitleBold"
+                BasedOn="{StaticResource labelBoldBaseStyle}"
+                TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource SubTitleFontSize}" />
+            </Style>
+
 
             <!--  ********** CONVERTERS **********  -->
             <converters:BoolInversorConverter x:Key="BoolInversorConverter" />
