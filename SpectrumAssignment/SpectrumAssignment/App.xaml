@@ -1,17 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpectrumAssignment.App">
+<Application
+    x:Class="SpectrumAssignment.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:SpectrumAssignment.Converters">
     <!--
         Define global resources and styles here, that apply to all pages in your app.
     -->
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
+            <Color x:Key="Primary">#049cdb</Color>
+            <Color x:Key="PrimaryDark">#04243c</Color>
             <Color x:Key="DeleteBackgroundColor">#D0695F</Color>
-            
+
             <Style TargetType="Button">
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="White" />
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">
@@ -36,11 +39,11 @@
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
-                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="White" />
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarTitleColor" Value="White" />
             </Style>
-            
+
             <x:Double x:Key="TitleFontSize">28</x:Double>
             <x:Double x:Key="SubTitleFontSize">18</x:Double>
             <x:Double x:Key="MediumTitleFontSize">16</x:Double>
@@ -51,8 +54,8 @@
             <Color x:Key="PlaceholderColor">#FFC7C7CD</Color>
             <Color x:Key="DashboardBackGround">#F2F2F2</Color>
             <Color x:Key="SeparatorColor">#FFe6e7e8</Color>
-            
-            <Style TargetType="ActivityIndicator" x:Key="NormalActivityIndicatorStyle">
+
+            <Style x:Key="NormalActivityIndicatorStyle" TargetType="ActivityIndicator">
                 <Setter Property="Color" Value="{StaticResource Primary}" />
                 <Setter Property="IsRunning" Value="True" />
                 <Setter Property="HeightRequest" Value="20" />
@@ -60,19 +63,32 @@
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
-            <Style TargetType="BoxView" >
-                <Setter Property="HeightRequest" Value="0.8"></Setter>
+            <Style TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="0.8" />
                 <Setter Property="Color" Value="{StaticResource SeparatorColor}" />
             </Style>
 
-            <Style  TargetType="Frame" x:Key="LightBlueFrameStyle">
-                <Setter Property="BackgroundColor" Value="{x:StaticResource Primary}"/>
+            <Style x:Key="LightBlueFrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{x:StaticResource Primary}" />
                 <Setter Property="HasShadow" Value="False" />
                 <Setter Property="Padding" Value="20,10,20,10" />
                 <Setter Property="CornerRadius" Value="10" />
             </Style>
-            
 
-        </ResourceDictionary>        
+            <Style x:Key="ValidationErrorLabelStyle" TargetType="{x:Type Label}">
+                <Setter Property="TextColor" Value="IndianRed" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
+            <OnPlatform x:Key="FontAwesomeIconRegular" x:TypeArguments="x:String">
+                <On Platform="Android" Value="fa-regular-pro-400.ttf#Font Awesome regular" />
+                <On Platform="iOS" Value="FontAwesome5Pro-Regular" />
+            </OnPlatform>
+
+            <!--  ********** CONVERTERS **********  -->
+            <converters:BoolInversorConverter x:Key="BoolInversorConverter" />
+            <converters:NullOrEmptyToBoolConverter x:Key="NullOrEmptyToBoolConverter" />
+            <converters:ValidationErrorConverter x:Key="ValidationErrorConverter" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

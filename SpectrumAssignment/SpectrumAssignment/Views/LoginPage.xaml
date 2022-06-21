@@ -3,19 +3,176 @@
     x:Class="SpectrumAssignment.Views.LoginPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:customcontrols="clr-namespace:SpectrumAssignment.CustomControls"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Icons="clr-namespace:FontAwesome"
+    xmlns:behavior="clr-namespace:SpectrumAssignment.Behaviors"
     xmlns:models="clr-namespace:SpectrumAssignment.Models"
+    xmlns:renderers="clr-namespace:SpectrumAssignment.Controls"
     xmlns:viewModels="clr-namespace:SpectrumAssignment.ViewModels"
     models:ViewModelLocator.AutoWireViewModel="True"
-    x:DataType="viewModels:LoginViewModel">
+    x:DataType="viewModels:LoginPageViewModel">
     <ContentPage.Content>
-        <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
-            <Button
-                Command="{Binding LoginCommand}"
-                Text="Login"
-                VerticalOptions="Center" />
-        </StackLayout>
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Grid BackgroundColor="White" RowDefinitions="100,*,50">
+                    <Path
+                        Grid.Row="0"
+                        Aspect="Fill"
+                        Data="m126.8675,108.63527l343,0l0,147.02589c-128.5,-58 -207.5,41.01956 -343,24.19026l0,-171.21615z"
+                        Fill="#04243c"
+                        Stroke="#04243c" />
+                    <StackLayout Grid.Row="0">
+                        <Label
+                            Margin="0,10,0,0"
+                            FontFamily="RobotoBold"
+                            FontSize="30"
+                            HorizontalOptions="Center"
+                            Text="Login"
+                            TextColor="White"
+                            VerticalOptions="Center" />
+                    </StackLayout>
+                    <Grid
+                        Grid.Row="1"
+                        Margin="10,0,10,0"
+                        RowDefinitions="Auto,Auto,Auto,*"
+                        RowSpacing="5">
+                        <Image
+                            Aspect="AspectFit"
+                            HeightRequest="160"
+                            HorizontalOptions="Center"
+                            Source="spectrums.png"
+                            WidthRequest="250" />
+                        <StackLayout
+                            Grid.Row="2"
+                            Margin="0,10,0,0"
+                            Orientation="Vertical">
+                            <StackLayout Spacing="{OnPlatform iOS=10, Android=5}">
+                                <Label FontSize="14" TextColor="Black">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Login Id" />
+                                            <Span Text=" *" TextColor="IndianRed" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Grid ColumnSpacing="0" RowSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="30" />
+
+                                    </Grid.ColumnDefinitions>
+                                    <renderers:BorderlessEntry
+                                        Grid.Column="0"
+                                        FontFamily="RobotoBold"
+                                        FontSize="16"
+                                        Keyboard="Text"
+                                        Placeholder="Login Id"
+                                        PlaceholderColor="Black"
+                                        Text="{Binding UserName.Value}"
+                                        VerticalOptions="Center">
+                                        <renderers:BorderlessEntry.Behaviors>
+                                            <behavior:EventToCommandBehavior Command="{Binding ValidateUserNameCommand}" EventName="TextChanged" />
+                                        </renderers:BorderlessEntry.Behaviors>
+                                    </renderers:BorderlessEntry>
+                                    <Image
+                                        Grid.Column="1"
+                                        Aspect="AspectFit"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                        <Image.Source>
+                                            <FontImageSource
+                                                FontFamily="{StaticResource FontAwesomeIconRegular}"
+                                                Glyph="{x:Static Icons:IconFonts.User}"
+                                                Size="25"
+                                                Color="{DynamicResource Primary}" />
+                                        </Image.Source>
+                                    </Image>
+                                </Grid>
+
+
+                                <BoxView HeightRequest="1" Color="Black" />
+
+                                <Label
+                                    x:Name="UserNameError"
+                                    FontAttributes="Bold"
+                                    IsVisible="{Binding UserName.Value}"
+                                    Style="{StaticResource ValidationErrorLabelStyle}"
+                                    Text="{Binding UserName.Errors, Converter={StaticResource ValidationErrorConverter}}"
+                                    TextColor="IndianRed" />
+                            </StackLayout>
+
+                            <StackLayout Spacing="{OnPlatform iOS=10, Android=5}">
+                                <Label FontSize="14" TextColor="Black">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Password" />
+                                            <Span Text=" *" TextColor="IndianRed" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Grid ColumnSpacing="0" RowSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="30" />
+                                    </Grid.ColumnDefinitions>
+                                    <renderers:BorderlessEntry
+                                        Grid.Column="0"
+                                        FontFamily="RobotoBold"
+                                        FontSize="16"
+                                        IsPassword="True"
+                                        Keyboard="Text"
+                                        Placeholder="Password"
+                                        PlaceholderColor="{DynamicResource grayMedium}"
+                                        Text="{Binding Password.Value}"
+                                        VerticalOptions="Center">
+                                        <renderers:BorderlessEntry.Behaviors>
+                                            <behavior:EventToCommandBehavior Command="{Binding ValidateUserPasswordCommand}" EventName="TextChanged" />
+                                        </renderers:BorderlessEntry.Behaviors>
+                                    </renderers:BorderlessEntry>
+                                    <Image
+                                        Grid.Column="1"
+                                        Aspect="AspectFit"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center">
+                                        <Image.Source>
+                                            <FontImageSource
+                                                FontFamily="{StaticResource FontAwesomeIconRegular}"
+                                                Glyph="{x:Static Icons:IconFonts.Key}"
+                                                Size="25"
+                                                Color="{DynamicResource Primary}" />
+                                        </Image.Source>
+                                    </Image>
+                                </Grid>
+
+
+                                <BoxView HeightRequest="1" Color="Black" />
+
+                                <Label
+                                    x:Name="UserPasswordError"
+                                    FontAttributes="Bold"
+                                    IsVisible="{Binding Password.Value}"
+                                    Style="{StaticResource ValidationErrorLabelStyle}"
+                                    Text="{Binding Password.Errors, Converter={StaticResource ValidationErrorConverter}}"
+                                    TextColor="IndianRed" />
+                            </StackLayout>
+                            <Button
+                                Grid.Row="3"
+                                BackgroundColor="{DynamicResource Primary}"
+                                Command="{Binding LoginCommand}"
+                                HeightRequest="50"
+                                Text="LogIn"
+                                TextColor="White"
+                                VerticalOptions="Start" />
+                            <Label
+                                Grid.Row="4"
+                                Margin="0,0,0,0"
+                                FontSize="12"
+                                HorizontalOptions="Center"
+                                Text="LoginTrouble ? GetHelp" />
+                        </StackLayout>
+                    </Grid>
+                </Grid>
+            </ScrollView>
+        </AbsoluteLayout>
+
     </ContentPage.Content>
 </ContentPage>
