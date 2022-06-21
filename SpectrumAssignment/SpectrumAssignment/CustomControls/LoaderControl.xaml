@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="this"
+             x:Class="SpectrumAssignment.CustomControls.LoaderControl">
+    <ActivityIndicator x:Name="activityIndicator" Color="{Binding Source={x:Reference this},Path=IndicatorColor}"   IsRunning="True" />
+    <Label x:Name="indicatorLabel"  TextColor="{Binding Source={x:Reference this},Path=IndicatorTextColor}" VerticalTextAlignment="Center"   HorizontalTextAlignment="Center" Text="{Binding Source={x:Reference this},Path=IndicatorText}" />
+</StackLayout>

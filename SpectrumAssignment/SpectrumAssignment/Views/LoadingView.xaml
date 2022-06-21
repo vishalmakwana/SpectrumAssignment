@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+              xmlns:models="clr-namespace:SpectrumAssignment.Models"
+             xmlns:customcontrols="clr-namespace:SpectrumAssignment.CustomControls"
+              models:ViewModelLocator.AutoWireViewModel="True"
+             x:Class="SpectrumAssignment.Views.LoadingView">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+            <customcontrols:LoaderControl  />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
