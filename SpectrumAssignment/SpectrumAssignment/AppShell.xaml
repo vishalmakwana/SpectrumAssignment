@@ -87,7 +87,8 @@
         Title="Home"
         ContentTemplate="{DataTemplate views:HomePage}"
         FlyoutItemIsVisible="False"
-        Route="HomePage" />
+        Route="HomePage"
+        Shell.FlyoutBehavior="Disabled" />
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
