@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace SpectrumAssignment.ViewModels
 {
-    public class AppShellViewModel : ApplicationBaseViewModel
+    public partial class AppShellViewModel : ApplicationBaseViewModel
     {
         #region Commands
 

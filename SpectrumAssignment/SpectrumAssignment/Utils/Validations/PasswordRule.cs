@@ -2,7 +2,7 @@
 
 namespace SpectrumAssignment.Validations
 {
-    internal class PasswordRule<T> : IValidationRule<T>
+    public class PasswordRule<T> : IValidationRule<T>
     {
         public string ValidationMessage { get; set; }
 

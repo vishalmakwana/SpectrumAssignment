@@ -1,4 +1,5 @@
-﻿using SpectrumAssignment.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using SpectrumAssignment.Models;
 using SpectrumAssignment.Services;
 using SpectrumAssignment.ViewModels.Base;
 using System;
@@ -10,16 +11,37 @@ using Xamarin.Forms;
 
 namespace SpectrumAssignment.ViewModels
 {
-    public class ApplicationBaseViewModel : ExtendedBindableObject
+    public partial class ApplicationBaseViewModel : ExtendedBindableObject
     {
+        [ObservableProperty]
+        bool _isBusy;
 
-   
+        [ObservableProperty]
+        string _title;
+
+
+        [ObservableProperty]
+        bool _isRefreshing;
+
+        [ObservableProperty]
+        bool _isInProgress;
+
+
+        #region Services
+        protected IApplicationUserService ApplicationUserService;
+        #endregion
+
+        #region Construtor
         public ApplicationBaseViewModel()
         {
-
+            ApplicationUserService = DependencyService.Resolve<IApplicationUserService>();
         }
-        protected internal virtual void OnAppearing() { }
-        protected internal virtual void Initialize(object navigationData = null) { }
+        #endregion
+
+        #region Methods
+
+        public  virtual void OnAppearing() { }
+        protected  virtual void Initialize(object navigationData = null) { }
 
         public static async Task GoToAsync(ShellNavigationState state, object navigationData = null, bool animate = false)
         {
@@ -85,6 +107,6 @@ namespace SpectrumAssignment.ViewModels
             Shell.Current.Navigated -= OnNavigated;
 
         }
-
+        #endregion
     }
 }

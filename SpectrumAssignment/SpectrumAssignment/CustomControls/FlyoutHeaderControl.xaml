@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    x:Class="SpectrumAssignment.CustomControls.FlyoutHeaderControl"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:customcontrols="clr-namespace:SpectrumAssignment.CustomControls"
+    Margin="0,0,0,10"
+    RowDefinitions="150,1">
+    <StackLayout
+        Grid.Row="0"
+        Margin="20,0,0,0"
+        Orientation="Vertical"
+        Spacing="15"
+        VerticalOptions="Center">
+        <customcontrols:AvatarCreatorControl x:Name="userAvatar" HorizontalOptions="Start" />
+        <StackLayout Spacing="0" VerticalOptions="Center">
+            <Label x:Name="userName" Style="{x:StaticResource SubTitleBold}" />
+            <Label x:Name="userEmail" Style="{x:StaticResource SmallTitle}" />
+        </StackLayout>
+    </StackLayout>
+    <BoxView Grid.Row="1" Color="{x:StaticResource PlaceholderColor}" />
+</Grid>

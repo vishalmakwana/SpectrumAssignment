@@ -1,12 +1,157 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SpectrumAssignment.Views.HomePage">
+<ContentPage
+    x:Class="SpectrumAssignment.Views.HomePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:Icons="clr-namespace:FontAwesome"
+    xmlns:behavior="clr-namespace:SpectrumAssignment.Behaviors"
+    xmlns:customcontrols="clr-namespace:SpectrumAssignment.CustomControls"
+    xmlns:models="clr-namespace:SpectrumAssignment.Models"
+    xmlns:viewModels="clr-namespace:SpectrumAssignment.ViewModels"
+    Title="Users"
+    models:ViewModelLocator.AutoWireViewModel="True"
+    x:DataType="viewModels:HomePageViewModel"
+    BackgroundColor="#eeeeee">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{Binding LogOutCommand}" Text="Logout">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource
+                    FontFamily="{StaticResource FontAwesomeIconRegular}"
+                    Glyph="{x:Static Icons:IconFonts.SignOut}"
+                    Size="25"
+                    Color="{DynamicResource Primary}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Padding="10,0,10,0">
+            <StackLayout Orientation="Horizontal">
+                <SearchBar
+                    x:Name="searchBar"
+                    Margin="-15,0,0,10"
+                    Placeholder="Search"
+                    SearchCommand="{Binding SearchCommand}"
+                    Text="{Binding Search}" />
+                <StackLayout IsVisible="false" VerticalOptions="Center">
+                    <Image
+                        Grid.Column="0"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="45">
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="{StaticResource FontAwesomeIconRegular}"
+                                Glyph="{x:Static Icons:IconFonts.ArrowAltCircleUp}"
+                                Size="25"
+                                Color="{DynamicResource Primary}" />
+                        </Image.Source>
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OrderByCommand}" />
+                        </Image.GestureRecognizers>
+
+                    </Image>
+                    <StackLayout.Triggers>
+                        <DataTrigger
+                            Binding="{Binding OrderByDerection}"
+                            TargetType="StackLayout"
+                            Value="asc">
+                            <Setter Property="IsVisible" Value="true" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding OrderByDerection}"
+                            TargetType="StackLayout"
+                            Value="desc">
+                            <Setter Property="IsVisible" Value="false" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                </StackLayout>
+
+                <StackLayout IsVisible="false" VerticalOptions="Center">
+                    <Image
+                        Grid.Column="0"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        WidthRequest="45">
+                        <Image.Source>
+                            <FontImageSource
+                                FontFamily="{StaticResource FontAwesomeIconRegular}"
+                                Glyph="{x:Static Icons:IconFonts.ArrowAltCircleDown}"
+                                Size="25"
+                                Color="{DynamicResource Primary}" />
+                        </Image.Source>
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding OrderByCommand}" />
+                        </Image.GestureRecognizers>
+
+                    </Image>
+                    <StackLayout.Triggers>
+                        <DataTrigger
+                            Binding="{Binding OrderByDerection}"
+                            TargetType="StackLayout"
+                            Value="desc">
+                            <Setter Property="IsVisible" Value="true" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding OrderByDerection}"
+                            TargetType="StackLayout"
+                            Value="asc">
+                            <Setter Property="IsVisible" Value="false" />
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                </StackLayout>
+
+            </StackLayout>
+
+
+            <RefreshView
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsBusy}"
+                RefreshColor="{DynamicResource Primary}">
+                <CollectionView
+                    ItemsSource="{Binding UserInfos}"
+                    SelectedItem="{Binding SelectedItem}"
+                    SelectionChangedCommand="{Binding ItemSelectedCommand}"
+                    SelectionMode="Single">
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:UserInfo">
+                            <StackLayout>
+                                <Frame
+                                    Margin="5"
+                                    Padding="10"
+                                    CornerRadius="10">
+                                    <Grid ColumnDefinitions="45,*">
+                                        <Image
+                                            Grid.Column="0"
+                                            Aspect="AspectFit"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            WidthRequest="45">
+                                            <Image.Source>
+                                                <FontImageSource
+                                                    FontFamily="{StaticResource FontAwesomeIconRegular}"
+                                                    Glyph="{x:Static Icons:IconFonts.User}"
+                                                    Size="25"
+                                                    Color="{DynamicResource Primary}" />
+                                            </Image.Source>
+                                        </Image>
+                                        <StackLayout Grid.Column="1">
+                                            <Label Style="{x:StaticResource SubTitleBold}" Text="{Binding name}" />
+                                            <Label Text="{Binding email}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                                <!--<StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ItemSelectedCommand}" CommandParameter="{Binding .}" />
+                                </StackLayout.GestureRecognizers>-->
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

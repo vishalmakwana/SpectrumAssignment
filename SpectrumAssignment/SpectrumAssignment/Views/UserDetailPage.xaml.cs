@@ -11,18 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace SpectrumAssignment.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class HomePage : ContentPage
+    public partial class UserDetailPage : ContentPage
     {
-        HomePageViewModel viewModel= new HomePageViewModel();
-        public HomePage()
+        public UserDetailPage()
         {
             InitializeComponent();
-            this.BindingContext = viewModel;
-        }
-        protected async  override void OnAppearing()
-        {
-            base.OnAppearing();
-            await viewModel.GetUserList();
+            BindingContext = new UserDetailPageViewModel();
         }
     }
 }

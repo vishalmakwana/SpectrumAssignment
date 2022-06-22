@@ -4,10 +4,12 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:customcontrols="clr-namespace:SpectrumAssignment.CustomControls"
-    xmlns:viewModels="clr-namespace:SpectrumAssignment.ViewModels"
+    xmlns:models="clr-namespace:SpectrumAssignment.Models"
+    xmlns:viewmodels="clr-namespace:SpectrumAssignment.ViewModels"
     xmlns:views="clr-namespace:SpectrumAssignment.Views"
-    Title="SpectrumAssignment"
-    x:DataType="viewModels:AppShellViewModel">
+    x:Name="shell"
+    Title="Spectrum Assignment"
+    x:DataType="viewmodels:AppShellViewModel">
 
     <!--
         The overall app visual hierarchy is defined here, along with navigation.
@@ -75,13 +77,20 @@
         Shell.FlyoutBehavior="Disabled"
         Shell.NavBarIsVisible="False" />
 
-    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="HomePage">
-        <ShellContent Title="Home" ContentTemplate="{DataTemplate views:HomePage}" />
-    </FlyoutItem>
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:HomePage}"
+        FlyoutItemIsVisible="False"
+        Route="HomePage"
+        Shell.FlyoutBehavior="Disabled" />
+
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
-            <customcontrols:ButtonControlWithProgressBar Command="{Binding LogOutCommand}" Text="Sign Out" />
+            <customcontrols:ButtonControlWithProgressBar
+                Command="{Binding LogOutCommand}"
+                IsInProgress="{Binding IsInProgress}"
+                Text="Sign Out" />
         </StackLayout>
     </Shell.FlyoutFooter>
 

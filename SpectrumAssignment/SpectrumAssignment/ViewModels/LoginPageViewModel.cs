@@ -1,14 +1,17 @@
-﻿using SpectrumAssignment.Validations;
+﻿using Newtonsoft.Json;
+using SpectrumAssignment.Models;
+using SpectrumAssignment.Validations;
 using SpectrumAssignment.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace SpectrumAssignment.ViewModels
 {
-    public class LoginPageViewModel : ApplicationBaseViewModel
+    public partial class LoginPageViewModel : ApplicationBaseViewModel
     {
         #region Services
 
@@ -87,6 +90,14 @@ namespace SpectrumAssignment.ViewModels
             ValidateFields();
             if (_userName.IsValid && _password.IsValid)
             {
+                var userInfo = new UserBasicInfo
+                {
+                    Email = _userName.Value,
+                    FullName = "Spectrum",
+                };
+                string userInfoJson = JsonConvert.SerializeObject(userInfo);
+                await SecureStorage.SetAsync(nameof(Settings.UserDetails), userInfoJson);
+                Settings.UserDetails = userInfo;
                 await Shell.Current.GoToAsync($"//{nameof(HomePage)}");
             }
 

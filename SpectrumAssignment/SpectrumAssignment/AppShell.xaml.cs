@@ -1,4 +1,5 @@
-﻿using SpectrumAssignment.ViewModels;
+﻿using SpectrumAssignment.Services;
+using SpectrumAssignment.ViewModels;
 using SpectrumAssignment.Views;
 using System;
 using System.Collections.Generic;
@@ -10,10 +11,12 @@ namespace SpectrumAssignment
     {
         public AppShell()
         {
-            this.BindingContext = new AppShellViewModel();
+         
             InitializeComponent();
-           
+            this.BindingContext = new AppShellViewModel();
             Routing.RegisterRoute(nameof(HomePage), typeof(HomePage));
+            Routing.RegisterRoute(nameof(UserDetailPage), typeof(UserDetailPage));
+            DependencyService.Register<IApplicationUserService, ApplicationUserService>();
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

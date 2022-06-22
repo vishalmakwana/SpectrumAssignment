@@ -6,7 +6,7 @@ namespace SpectrumAssignment.Models
 {
     public class Settings
     {
-        internal static bool IsLogin = false;
-        internal static UserBasicInfo UserDetails { get; set; }
+        public static bool IsLogin = false;
+        public static UserBasicInfo UserDetails { get; set; }
     }
 }
