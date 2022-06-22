@@ -13,6 +13,7 @@ namespace SpectrumAssignment.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UserDetailPage : ContentPage
     {
+       
         public UserDetailPage()
         {
             InitializeComponent();

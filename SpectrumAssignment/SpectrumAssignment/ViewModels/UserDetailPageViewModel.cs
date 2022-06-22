@@ -7,17 +7,25 @@ namespace SpectrumAssignment.ViewModels
 {
     public partial class UserDetailPageViewModel : ApplicationBaseViewModel
     {
+        
+
         public UserDetailPageViewModel()
         {
-
         }
-        protected  override void Initialize(object navigationData = null)
+        protected override void Initialize(object navigationData = null)
         {
             base.Initialize(navigationData);
-            var doctorDetails = TryGetValue<UserInfo>(navigationData);
+            //var user = TryGetValue<UserInfo>(navigationData);
+            //if (user.id > 0)
+            //{
+            //    //Userdetail.name = user.name;
+            //    //Userdetail.email = user.email;
+            //    //Userdetail.status = user.status;
+            //    //Userdetail.id = user.id;
+            //}
         }
 
     }
 
-    
+
 }

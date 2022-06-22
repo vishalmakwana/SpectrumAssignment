@@ -125,7 +125,8 @@ namespace SpectrumAssignment.ViewModels
 
         private async Task ExecuteItemSelectedCommand()
         {
-            await GoToAsync(nameof(UserDetailPage), SelectedItem);
+            //await GoToAsync(nameof(UserDetailPage), SelectedItem);
+           // await App.Current.MainPage.Navigation.PushAsync(new UserDetailPage())
         }
 
        

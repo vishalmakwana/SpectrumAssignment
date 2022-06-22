@@ -76,14 +76,18 @@
         Route="LoginPage"
         Shell.FlyoutBehavior="Disabled"
         Shell.NavBarIsVisible="False" />
-
+    <!--<FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="HomePage">
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate views:HomePage}"
+            FlyoutItemIsVisible="False"
+            Route="HomePage" />
+    </FlyoutItem>-->
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate views:HomePage}"
         FlyoutItemIsVisible="False"
-        Route="HomePage"
-        Shell.FlyoutBehavior="Disabled" />
-
+        Route="HomePage" />
 
     <Shell.FlyoutFooter>
         <StackLayout Padding="20">
